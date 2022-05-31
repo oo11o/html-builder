@@ -25,7 +25,7 @@ export default class VirtualHtml {
   getTag(){
 
   }
-  getHtmlFromBlock(element){
+  createTag(element){
     const attributes = element.attributes ?? [];
     let strAttributes = '';
 
