@@ -1,4 +1,6 @@
 // VirtualHtml
+import selfTags from "./selftag.js";
+
 export default class VirtualHtml {
   constructor(html) {
     const defaultOptions = {
@@ -14,26 +16,24 @@ export default class VirtualHtml {
         },
       ],
       attributes: [
-        { name: 'lang', value: 'ru' },
+        {name: 'lang', value: 'ru'},
       ],
     };
     this.html = html ?? defaultOptions;
   }
 
   createTag(element) {
-    const attributes = element.attributes ?? [];
-    let strAttributes = '';
+    const {tag, content, attributes} = element;
+    const attrForTag = attributes.reduce((acc, {name, value}) => acc.concat(` ${name}="${value}"`), '');
 
-    // if attributes have convert collection attributes to string
-    if (attributes.length > 0) {
-      strAttributes = attributes.reduce((acc, { name, value }) => acc.concat(` ${name}="${value}"`), '');
+    return {
+      startTag: `<${tag}${attrForTag}>${content}`,
+      closedTag: selfTags.includes(tag) ? '' : `</${tag}>`,
     }
-
-    return `<${element.tag}${strAttributes}></${element.tag}>`;
   }
 
   generateHtml() {
-  //  console.log(this.html);
+    //  console.log(this.html);
     const recursionByVirtualHtml = (data) => {
       console.log(data.tag);
       if (data.children) {
