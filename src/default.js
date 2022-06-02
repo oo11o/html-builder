@@ -1,22 +1,22 @@
 export default {
   tag: 'html',
-  attribute: [{ lang: 'en' }],
+  attributes: [{ name: 'lang', value: 'ru'}],
   content: '',
   children: [
     {
       tag: 'head',
-      attribute: [],
+      attributes: [],
       content: '',
       children: [
         {
           tag: 'meta',
-          attribute: [{ name: 'charset', value: 'UTF-8' }],
+          attributes: [{ name: 'charset', value: 'UTF-8' }],
           content: '',
           children: [],
         },
         {
           tag: 'meta',
-          attribute: [
+          attributes: [
             { name: 'name', value: 'viewport' },
             { name: 'content', value: 'width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0' },
           ],
@@ -25,7 +25,7 @@ export default {
         },
         {
           tag: 'title',
-          attribute: [],
+          attributes: [],
           content: 'Title page',
           children: [],
         },
@@ -33,7 +33,7 @@ export default {
     },
     {
       tag: 'body',
-      attribute: [],
+      attributes: [],
       content: '',
       children: [],
     },
