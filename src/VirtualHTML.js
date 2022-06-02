@@ -32,14 +32,25 @@ export default class VirtualHtml {
     }
   }
 
-  generateHtml() {
-    //  console.log(this.html);
-    const recursionByVirtualHtml = (data) => {
-      console.log(data.tag);
-      if (data.children) {
-        recursionByVirtualHtml(data.children);
+  generateHtml(tags = this.html) {
+    let accHtml = '';
+    const stackClosedTags = [];
+    const recursionByVirtualHtml = (node) => {
+      const { startTag, closedTag } = this.createTag(node);
+      accHtml += startTag;
+
+      // self-closing tags don't have closed pair and children
+      if (!closedTag) return accHtml;
+
+      stackClosedTags.push(closedTag);
+      if (Object.keys(node.children).length > 0) {
+        node.children.forEach((item) => recursionByVirtualHtml(item));
       }
+      accHtml += stackClosedTags.pop();
+
+      return accHtml;
     };
-    recursionByVirtualHtml(this.html);
+
+    return recursionByVirtualHtml(tags);
   }
 }
